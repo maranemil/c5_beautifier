@@ -1,0 +1,70 @@
+
+<!doctype html>
+
+<title>CodeMirror: HTML mixed mode</title>
+<meta charset="utf-8"/>
+
+<link rel="stylesheet" href="lib/codemirror.css">
+<link rel="stylesheet" href="theme/mbo.css">
+
+
+<script src="lib/codemirror.js"></script>
+<script src="mode/xml/xml.js"></script>
+<script src="mode/javascript/javascript.js"></script>
+<script src="mode/css/css.js"></script>
+
+<script src="mode/htmlmixed/htmlmixed.js"></script>
+<style>.CodeMirror {border-top: 1px solid black; border-bottom: 1px solid black;}</style>
+
+
+<article>
+
+<form>
+
+<textarea id="code" name="code">
+<html style="color: green">
+  <!-- this is a comment -->
+  <head>
+    <title>Mixed HTML Example</title>
+    <style type="text/css">
+      h1 {font-family: comic sans; color: #f0f;}
+      div {background: yellow !important;}
+      body {
+        max-width: 50em;
+        margin: 1em 2em 1em 5em;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Mixed HTML Example</h1>
+    <script>
+      function jsFunc(arg1, arg2) {
+        if (arg1 && arg2) document.body.innerHTML = "achoo";
+      }
+    </script>
+  </body>
+</html>
+</textarea>
+
+</form>
+
+    <script>
+      // Define an extended mixed-mode that understands vbscript and
+      // leaves mustache/handlebars embedded templates in html mode
+      var mixedMode = {
+		
+        name: "htmlmixed",
+        scriptTypes: [{matches: /\/x-handlebars-template|\/x-mustache/i,
+                       mode: null},
+                      {matches: /(text|application)\/(x-)?vb(a|script)/i,
+                       mode: "vbscript"}]
+      };
+      var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+		mode: mixedMode, 
+		theme: "mbo",
+		lineNumbers: true,
+		tabMode: "indent"
+	  });
+    </script>
+
+  </article>

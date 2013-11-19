@@ -1,0 +1,316 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>{#advanced_dlg.code_title}</title>
+	
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.js"></script>
+	
+	<script type="text/javascript" src="../../tiny_mce_popup.js"></script>
+	<script type="text/javascript" src="js/source_editor.js"></script>
+	<style type="text/css">@import "../../../../css/ccm.app.css";</style>
+	<style type="text/css">@import "../../../../css/ccm.tinymce.css";</style>
+		
+	<!-- codemirror -->
+	<link rel="stylesheet" href="js/codemirror/lib/codemirror.css">
+    <link rel="stylesheet" href="js/codemirror/addon/hint/show-hint.css">
+			
+	<link rel="stylesheet" href="js/codemirror/theme/3024-day.css">
+	<link rel="stylesheet" href="js/codemirror/theme/3024-night.css">
+	<link rel="stylesheet" href="js/codemirror/theme/ambiance.css">
+	<link rel="stylesheet" href="js/codemirror/theme/base16-dark.css">
+	<link rel="stylesheet" href="js/codemirror/theme/base16-light.css">
+	<link rel="stylesheet" href="js/codemirror/theme/blackboard.css">
+	<link rel="stylesheet" href="js/codemirror/theme/cobalt.css">
+	<link rel="stylesheet" href="js/codemirror/theme/eclipse.css">
+	<link rel="stylesheet" href="js/codemirror/theme/elegant.css">
+	<link rel="stylesheet" href="js/codemirror/theme/erlang-dark.css">
+	<link rel="stylesheet" href="js/codemirror/theme/lesser-dark.css">
+	<link rel="stylesheet" href="js/codemirror/theme/mbo.css">
+	<link rel="stylesheet" href="js/codemirror/theme/midnight.css">
+	<link rel="stylesheet" href="js/codemirror/theme/monokai.css">
+	<link rel="stylesheet" href="js/codemirror/theme/neat.css">
+	<link rel="stylesheet" href="js/codemirror/theme/night.css">
+	<link rel="stylesheet" href="js/codemirror/theme/paraiso-dark.css">
+	<link rel="stylesheet" href="js/codemirror/theme/paraiso-light.css">
+	<link rel="stylesheet" href="js/codemirror/theme/rubyblue.css">
+	<link rel="stylesheet" href="js/codemirror/theme/solarized.css">
+	<link rel="stylesheet" href="js/codemirror/theme/the-matrix.css">
+	<link rel="stylesheet" href="js/codemirror/theme/tomorrow-night-eighties.css">
+	<link rel="stylesheet" href="js/codemirror/theme/twilight.css">
+	<link rel="stylesheet" href="js/codemirror/theme/vibrant-ink.css">
+	<link rel="stylesheet" href="js/codemirror/theme/xq-dark.css">
+	<link rel="stylesheet" href="js/codemirror/theme/xq-light.css">
+
+	<script src="js/codemirror/lib/codemirror.js"></script>
+	<script src="js/codemirror/mode/xml/xml.js"></script>
+	<script src="js/codemirror/mode/javascript/javascript.js"></script>
+	<script src="js/codemirror/mode/css/css.js"></script>
+	 <script src="js/codemirror/mode/htmlmixed/htmlmixed.js"></script>
+	 
+	<script src="js/codemirror/keymap/extra.js"></script>
+		
+	<script src="js/codemirror/addon/selection/active-line.js"></script>
+	<script src="js/codemirror/addon/edit/matchbrackets.js"></script>
+	<script src="js/codemirror/addon/wrap/hardwrap.js"></script>
+
+    <script src="js/codemirror/addon/hint/show-hint.js"></script>
+    <script src="js/codemirror/addon/hint/html-hint.js"></script>
+    <script src="js/codemirror/addon/hint/xml-hint.js"></script>
+	<script src="js/codemirror/addon/hint/css-hint.js"></script>
+
+	<style>.CodeMirror {border-top: 1px solid black; border-bottom: 1px solid black;}</style>
+	<style type="text/css">
+		.CodeMirror {
+			border: 1px solid #eee;
+			height: auto;
+		}
+
+		.CodeMirror-scroll {
+			/*height: auto;*/
+			overflow-y: hidden;
+			overflow-x: auto;
+		}
+	</style>
+	
+	<script type="text/javascript" src="js/beautifier/beautify-js.js"></script>
+	<script type="text/javascript" src="js/beautifier/beautify-html.js"></script>
+	
+	 <!-- codemirror --> 
+	 	 
+	 <!-- 
+	 
+	 <script type="text/javascript" src="js/beautifier/beautify-js.js"></script>
+	 pretty js beautify 
+	         <script type="text/javascript" src="js/beautifier/unpackers/javascriptobfuscator_unpacker.js"></script>
+        <script type="text/javascript" src="js/beautifier/unpackers/myobfuscate_unpacker.js"></script>
+        <script type="text/javascript" src="js/beautifier/unpackers/p_a_c_k_e_r_unpacker.js"></script>
+        <script type="text/javascript" src="js/beautifier/unpackers/urlencode_unpacker.js"></script>
+		
+        <script type="text/javascript" src="js/beautifier/pretty.js"></script>
+        <script type="text/javascript" src="js/beautifier/pretty-html.js"></script>
+        <!--<script type="text/javascript" src="js/beautifier/script.js"></script>
+	 pretty js beautify 
+	 --> 
+	 		
+</head>
+<body onresize="resizeInputs();" style="display:none; overflow:hidden;">
+	
+	<form name="source" onsubmit="saveContent();return false;" action="#">
+		<div style="float: left" class="title">{#advanced_dlg.code_title}</div>
+		
+		
+		<div id="wrapline" style="float: right">
+			<input type="checkbox" name="wraped" id="wraped" onclick="toggleWordWrap(this);initCodeMirrorToggle();" class="wordWrapCode" />
+			<label for="wraped">{#advanced_dlg.code_wordwrap}</label>
+		</div>
+		
+
+		<br style="clear: both" /> 
+
+		<textarea name="htmlSource" id="htmlSource" rows="35" cols="60" style="font-family: 'Courier New',Courier,monospace; font-size: 12px;" dir="ltr" wrap="on" class="mceFocus"></textarea>
+		
+		<!-- width: 100%; height: 100%; -->
+		<br/><br/>
+		
+		
+		<div class="mceActionPanel ccm-ui">
+			<input type="submit" style="float: right" class="btn primary"  name="insert" value="{#update}" id="insert" />
+			<input type="button" class="btn" name="cancel" value="{#cancel}" onclick="tinyMCEPopup.close();" id="cancel" />
+		</div>
+	</form>
+	
+	<p>Select a theme: <select onchange="selectTheme();return false" id=select>
+    <option selected>default</option>
+    <option>3024-day</option>
+    <option>3024-night</option>
+    <option>ambiance</option>
+    <option>base16-dark</option>
+    <option>base16-light</option>
+    <option>blackboard</option>
+    <option>cobalt</option>
+    <option>eclipse</option>
+    <option>elegant</option>
+    <option>erlang-dark</option>
+    <option>lesser-dark</option>
+    <option>mbo</option>
+    <option>midnight</option>
+    <option>monokai</option>
+    <option>neat</option>
+    <option>night</option>
+    <option>paraiso-dark</option>
+    <option>paraiso-light</option>
+    <option>rubyblue</option>
+    <option>solarized dark</option>
+    <option>solarized light</option>
+    <option>the-matrix</option>
+    <option>tomorrow-night-eighties</option>
+    <option>twilight</option>
+    <option>vibrant-ink</option>
+    <option>xq-dark</option>
+    <option>xq-light</option>
+</select>
+</p>
+
+	<script>
+	  /*var editor = CodeMirror.fromTextArea(document.getElementById("htmlSource"), {
+		lineNumbers: true,
+		styleActiveLine: true,
+		matchBrackets: true
+	  });*/  
+	  
+	  function selectTheme() {
+		var input = document.getElementById("select");
+		var theme = input.options[input.selectedIndex].innerHTML;
+		//editor.setOption("theme", theme);
+		//editor.toTextArea();
+		console.log(theme)
+		$('.CodeMirror').remove();
+		setTimeout(function(){
+			initCodeMirror(theme);
+		},500)
+	  }
+	</script>	
+		
+	  <script>
+      // Define an extended mixed-mode that understands vbscript and
+      // leaves mustache/handlebars embedded templates in html mode
+	  	  
+			setTimeout(function(){
+				initCodeMirror("monokai");
+			},500)	  
+			  
+			function initCodeMirrorToggle(){
+				setTimeout(function(){
+					initCodeMirror("monokai");
+				},500)
+			}			  
+		  
+			function initCodeMirror(cmtheme){	 
+		 
+				// destroy CodeMirror cm-s-mbo	
+				// http://codemirror.net/demo/		
+				// http://codemirror.net/				
+				// http://codemirror.net/1/manual.html
+				// http://codemirror.net/2/doc/manual.html
+				
+				var mixedMode = {
+					name: "htmlmixed",
+					scriptTypes: [{matches: /\/x-handlebars-template|\/x-mustache/i, mode: null},
+						 {matches: /(text|application)\/(x-)?vb(a|script)/i, mode: "js"}]
+				};
+				
+				//var beauty = window.js_beautify($("#htmlSource").val())
+				//$("#htmlSource").val(beauty)
+				
+				// http://jsfiddle.net/js/beautifier.js
+				var beauty = window.html_beautify($("#htmlSource").val(),{
+				//max_char:30
+					'indent_size': 2,
+					'indent_char': ' ',
+					'max_char': 78,
+					'brace_style': 'expand',
+					'unformatted': ['a', 'sub', 'sup', 'b', 'i', 'u']
+				})
+                $("#htmlSource").val(beauty)
+				//javascript:(function(){jQuery('#htmlSource').css({'font-size':'9pt','font-family':'monospace'});})();
+
+                CodeMirror.commands.autocomplete = function(cm) {
+                    //CodeMirror.showHint(cm, CodeMirror.hint.javascript);
+                    CodeMirror.showHint(cm, CodeMirror.hint.html);
+                    //CodeMirror.showHint(cm, CodeMirror.hint.css);
+
+                };
+
+                // var textarea = document.getElementById('block');
+				editor = CodeMirror.fromTextArea(document.getElementById("htmlSource"), {
+					//mode: mixedMode,
+                    mode: "text/html",
+                    extraKeys: {"Ctrl-Space": "autocomplete"},
+                    value: "<!doctype html>\n<html>\n  " + document.documentElement.innerHTML + "\n</html>",
+					//mode: "markdown",
+					lineWrapping: true,
+					//content: textarea.value,
+					theme: cmtheme,
+					lineNumbers: true,
+					matchBrackets: true,
+					//viewportMargin: Infinity,
+					fullScreen:true,
+					//mode: "text/x-csrc",
+					onChange: function(cm) { 
+						//document.getElementById("htmlSource").value = cm.getValue();
+						//editor.refresh()
+					}
+					//tabMode: "indent"
+					 
+				});
+
+                // http://codemirror.net/doc/manual.html#setSize
+				editor.setSize("100%","75%");
+
+				/*editor.resizable({
+					resize: function() {
+						editor.setSize($(this).width(), $(this).height());
+					}
+				});*/
+			
+				
+				var wait, options = {column: 60};
+				editor.on("change", function(cm, change) {
+					clearTimeout(wait);
+					wait = setTimeout(function() {
+						//cm.wrapParagraphsInRange(change.from, CodeMirror.changeEnd(change), options);
+						document.getElementById("htmlSource").value = editor.getValue();
+					}, 200);
+				});
+				
+				$(".CodeMirror-wrapping > IFRAME").css({ visibility: 'visible' });
+				
+				/*$('.CodeMirror').resizable({
+					resize: function() {
+						editor.setSize($(this).width(), $(this).height());
+					},
+					stop: function() {
+							$(".CodeMirror-wrapping > IFRAME").css({ visibility: 'visible' });
+					},
+
+					start: function() {
+							$('.CodeMirror-wrapping > iframe').height( $(this).height() );
+					}
+				});*/
+				
+				//CodeMirror.commands["selectAll"](editor);      
+			
+				/*editor.autoFormatRange(range.from, range.to);
+				
+				function autoFormatRange() {
+					var totalLines = editor.lineCount();
+					var totalChars = editor.getTextArea().value.length;
+					editor.autoFormatRange({line:0, ch:0}, {line:totalLines, ch:totalChars});
+				}*/
+				
+				//editor.on("blur", function(){
+					//document.getElementById("htmlSource").value = editor.getValue();
+				//});					
+			
+			}
+	  	  
+			$('document').ready(function () {
+				$("#beautify").click(function () {
+				//setTimeout(function(){
+					var beauty = window.js_beautify($("#htmlSource").val())
+					$("#htmlSource").val(beauty)
+					selectTheme();
+					//},900)
+				})
+			});
+			
+					
+(function($) {
+  //  $('.CodeMirror').css('overflow', 'hidden').autogrow()	       
+})(jQuery);
+
+		  
+    </script>
+	
+	
+</body>
+</html>
