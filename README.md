@@ -9,4 +9,4 @@ CodeMirror syntax highlighter for textarea working together with tinyMCE in Conc
 * **created:  2013 Oct 20
 * **modified: 2013 Nov 19
 
-[![Editor Screen](https://github.com/maranemil/c5_beautifier/raw/master/img/editor_screen.png)](#features)
+[![Editor Screen](https://github.com/maranemil/c5_beautifier/blob/master/editor_screen.png)](#features)
