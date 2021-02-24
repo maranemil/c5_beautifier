@@ -3,7 +3,7 @@ c5_beautifier
 
 CodeMirror syntax highlighter for textarea working together with tinyMCE in Concrete5
 
-### Info
+## Info
 * ** Author: Emil Maran
 * ** Tags: CodeMirror, syntax, highlighter
 * ** created:  2013 Oct 20
